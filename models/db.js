@@ -62,9 +62,13 @@ create_comments = async () => {
 
 
 create_dummy = async () => {
-    const text = "INSERT INTO users(username,email,password) VALUES ($1,$2,$3)"
-    const params = ["reunion","reunion@email.com","reunion"];
-    const db = await pool.query(text,params);
+    const query = "Select * from users";
+    const users = await pool.query(query);
+    if(users.rowCount==0){
+        const text = "INSERT INTO users(username,email,password) VALUES ($1,$2,$3)"
+        const params = ["reunion","reunion@email.com","reunion"];
+        const db = await pool.query(text,params);
+    }
 }
 exports.create_db = () => {
     create_users();
