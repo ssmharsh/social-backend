@@ -29,22 +29,22 @@ router.post("/posts",validateToken, async (req, res) => {
 });
 
 
-router.delete("/posts",validateToken, async (req, res) => {
+router.delete("/posts/:id",validateToken, async (req, res) => {
   const out = await posts.delete(req, res);
   res.status(out.statusCode).json(out);
 });
 
-router.post("/like",validateToken, async (req, res) => {
+router.post("/like/:id",validateToken, async (req, res) => {
   const out = await posts.like(req, res);
   res.status(out.statusCode).json(out);
 });
 
-router.post("/unlike",validateToken, async (req, res) => {
+router.post("/unlike/:id",validateToken, async (req, res) => {
   const out = await posts.unlike(req, res);
   res.status(out.statusCode).json(out);
 });
 
-router.post("/comment",validateToken, async (req, res) => {
+router.post("/comment/:id",validateToken, async (req, res) => {
   const out = await posts.comment(req, res);
   res.status(out.statusCode).json(out);
 });

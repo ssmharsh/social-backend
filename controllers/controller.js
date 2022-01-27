@@ -161,7 +161,7 @@ exports.create = async (req, res) => {
 
 exports.delete = async (req, res) => {
     const text = "DELETE FROM posts Where postId = $1";
-    const params =[req.body.postId];
+    const params =[req.params.id];
     try{
         const db = await pool.query(text,params);
         return {
@@ -181,7 +181,7 @@ exports.delete = async (req, res) => {
 
 exports.like = async (req, res) => {
     const text = "Insert into likes (userId,postId) VALUES ($1,$2)";
-    const params =[req.userId,req.body.postId];
+    const params =[req.userId,req.params.id];
 
     try{
         const db = await pool.query(text,params);
@@ -199,7 +199,7 @@ exports.like = async (req, res) => {
 
 exports.unlike = async (req, res) => {
     const text = "DELETE FROM likes Where userId = $1 and postId = $2";
-    const params =[req.userId,req.body.postId];
+    const params =[req.userId,req.params.id];
 
     try{
         const db = await pool.query(text,params);
@@ -218,7 +218,7 @@ exports.unlike = async (req, res) => {
 
 exports.comment = async (req, res) => {
     const text = "Insert into comments (comment,userId,postId) VALUES ($1,$2,$3)";
-    const params =[req.body.comment,req.userId,req.body.postId];
+    const params =[req.body.comment,req.userId,req.params.id];
 
     try{
         const db = await pool.query(text,params);
